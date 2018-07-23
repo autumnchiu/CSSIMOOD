@@ -4,19 +4,23 @@
   <title>Title</title>
   <link rel="stylesheet" href="static/homepage.css">
   <script src="static/homepage.js" type="text/javascript"></script>
+  <style>
+    .buttonish {
+      background-color: lightgreen;
+      padding: 20px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-family: Verdana;
+    }
+  </style>
 </head>
 
 <body>
-<div id = "wrapper1">
-  <button class = "button" id ="button1">Angry</button>
-  <button class = "button" id ="button2">Sad</button>
-  <button class = "button" id ="button3">Happy</button>
-
-</div>
-<div id = "wrapper2">
-  <button class = "button" id = "button4">Annoyed</button>
-  <button class = "button" id = "button5">Tired</button>
-  <button class = "button" id = "button6">Excited</button>
+<div id = "wrapper1">{% for emotion in emotions %}
+  <!--<a class="buttonish" href="/emotion?emotion={{emotion}}">{{emotion}}</a>-->
+  <button class="button" onclick="handleEmotion('{{emotion}}', this)">{{emotion}}</button>
+  {% endfor %}
 </div>
 </body>
 </html>

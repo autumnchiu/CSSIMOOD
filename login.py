@@ -42,10 +42,28 @@ class AdminPage(webapp2.RequestHandler):
 class homePage(webapp2.RequestHandler):
     def get(self):
         content = JINJA_ENV.get_template('templates/homepage.html')
-        self.response.write(content.render())
+        params = {}
+        params['emotions'] = [
+            'Angry',
+            'Sad',
+            'Happy',
+            'Annoyed',
+            'Tired',
+            'Excited',
+            'Sick',
+            'Ecstatic',
+            'Hungry'
+        ]
+        self.response.write(content.render(params))
+
+class EmotionHandler(webapp2.RequestHandler):
+    def dispatch(self):
+        my_emotion = self.request.get('emotion')
+        self.response.out.write('The emotion entered was: ' + my_emotion)
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/homepage', homePage),
-    ('/admin', AdminPage)
+    ('/admin', AdminPage),
+    ('/emotion', EmotionHandler),
 ], debug=True)
