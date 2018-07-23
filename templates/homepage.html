@@ -18,6 +18,14 @@
 </head>
 
 <body>
+  <h1>LOG YOUR FEELINGS</h1>
+  <!-- Side navigation -->
+  <div class="sidenav">
+    <a href="/about">ABOUT</a>
+    <a href="/dailylog">DAILY LOG</a>
+    <a href = "/homepage">HOMEPAGE</a>
+  </div>
+
 <div id = "wrapper1">{% for emotion in emotions %}
   <a class="button" href="/emotion?emotion={{emotion}}">{{emotion}}</a>
   <!--<button class="button" onclick="handleEmotion('{{emotion}}', this)">{{emotion}}</button>-->
