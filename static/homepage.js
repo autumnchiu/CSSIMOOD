@@ -20,12 +20,12 @@ function handleEmotion(myEmotion, callingButton) {
   currentEmotion = myEmotion;
   clearButtonBackgrounds();
   callingButton.style.backgroundColor = 'blue';
-  
+
 }
 
 function clearButtonBackgrounds() {
   var buttons = document.getElementsByClassName("button");
   for (var i = 0; i < buttons.length; i++) {
-    buttons[i].style.backgroundColor = 'lightgreen';
+    buttons[i].style.backgroundColor = '#4CAF50';
   }
 }
