@@ -1,6 +1,14 @@
 from google.appengine.api import users
 import webapp2
-#import jinja2
+import jinja2
+import os
+
+JINJA_ENV = jinja2.Environment(
+	loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
+	extensions = ['jinja2.ext.autoescape'],
+	autoescape =True
+
+)
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -12,8 +20,7 @@ class MainPage(webapp2.RequestHandler):
             greeting = 'Welcome, {}! (<a href="{}">sign out</a>)'.format(
                 nickname, logout_url)
             #Redirect to Main Page
-            self.redirect('/homePage')
-
+            self.redirect('/homepage')
         else:
             login_url = users.create_login_url('/')
             greeting = '<a href="{}">Sign in</a>'.format(login_url)
@@ -34,10 +41,11 @@ class AdminPage(webapp2.RequestHandler):
 
 class homePage(webapp2.RequestHandler):
     def get(self):
-        print 'we need to work on this page!'
+        content = JINJA_ENV.get_template('templates/homepage.html')
+        self.response.write(content.render())
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/homePage', homePage),
+    ('/homepage', homePage),
     ('/admin', AdminPage)
 ], debug=True)
