@@ -18,7 +18,13 @@
 </head>
 
 <body>
-<div id = "wrapper1">{% for emotion in emotions %}
+  <!-- Side navigation -->
+  <div class="sidenav">
+    <a href="/about">ABOUT</a>
+    <a href="/dailylog">DAILY LOG</a>
+  </div>
+
+<div class="buttons" id = "wrapper1">{% for emotion in emotions %}
   <a class="button" href="/emotion?emotion={{emotion}}">{{emotion}}</a>
   <!--<button class="button" onclick="handleEmotion('{{emotion}}', this)">{{emotion}}</button>-->
   {% endfor %}
