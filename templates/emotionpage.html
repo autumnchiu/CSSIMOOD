@@ -2,9 +2,29 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="static/emotionpage.css">
+
+
     <title> Your emotion was {{emotion}}</title>
   </head>
   <body>
-    Your emotion was {{emotion}}
+    <div class = "questioncontainer">
+    <h1 id = "greetingmessage">Why do I feel {{emotion}} right now ?</h1>
+    <form method = "get">
+      <input type = "text" name = "answer"></input>
+      <input type="submit" value="Submit">
+    </form>
+
+  </div>
+    <div class="slidecontainer">
+
+      <input type="range" min="1" max="10" value="5" class="slider" id="myRange">
+      <h2 >Intensity</h2>
+
+      <h2 id= "demo"></h2>
+    </div>
+
+
   </body>
+  <script src="static/emotionpage.js" type="text/javascript"></script>
 </html>
