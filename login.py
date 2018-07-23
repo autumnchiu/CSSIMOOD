@@ -61,6 +61,7 @@ class EmotionHandler(webapp2.RequestHandler):
         my_emotion = self.request.get('emotion')
         self.response.out.write('The emotion entered was: ' + my_emotion)
 
+
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/homepage', homePage),
