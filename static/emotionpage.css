@@ -37,7 +37,7 @@
     cursor: pointer; /* Cursor on hover */
 }
 
-#greetingmessage {
+.questioncontainer {
 
   text-align: center;
   background-color: #4F9646;
