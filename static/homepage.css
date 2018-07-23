@@ -1,6 +1,7 @@
 .button {
-    height: 200px;
-    width: 200px;
+    /* $button-dimmension: height *.2; */
+    height: 20vw;
+    width: 20vw;
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -9,7 +10,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 40px;
-    /* margin: 4px 2px; */
+    margin: 4px 2px;
     align-items: center;
 
     /* border-radius: 50%; */
@@ -37,12 +38,12 @@ body {
 .button:hover {
     background-color: #145859
   }
-/*
+
 #wrapper1 {
   text-align: center;
-  margin-top: 180px;
-  display: flex;
-} */
+  margin-top: 60px;
+  margin-left: 200px;
+}
 
 /* #wrapper2 {
   text-align: center;
@@ -50,7 +51,7 @@ body {
 } */
 
 .sidenav {
-    width: 130px;
+    width: 200px;
     position: fixed;
     z-index: 1;
     top: 20px;
@@ -81,4 +82,14 @@ body {
 @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
+}
+
+h1{
+  background-color: #35662F;
+  color: white;
+  margin-left: 230px;
+  margin-right: 250px;
+  margin-top: 50px;
+  padding: 2%;
+  text-align: center;
 }
