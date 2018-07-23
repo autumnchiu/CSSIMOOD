@@ -2,9 +2,13 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="static/emotionpage.css">
     <title> Your emotion was {{emotion}}</title>
   </head>
   <body>
-    Your emotion was {{emotion}}
+    <h1>Why are you  feeling {{emotion}} ?</h1>
+    <div class="slidecontainer">
+      <input type="range" min="1" max="10" value="50" class="slider" id="myRange">
+    </div>
   </body>
 </html>
