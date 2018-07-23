@@ -59,8 +59,9 @@ class homePage(webapp2.RequestHandler):
 class EmotionHandler(webapp2.RequestHandler):
     def dispatch(self):
         my_emotion = self.request.get('emotion')
-        self.response.out.write('The emotion entered was: ' + my_emotion)
-
+        #self.response.out.write('The emotion entered was: ' + my_emotion)
+        emotionpage = JINJA_ENV.get_template('templates/emotionpage.html')
+        self.response.write(emotionpage.render(emotion=my_emotion))
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),

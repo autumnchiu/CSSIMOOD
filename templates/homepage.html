@@ -12,13 +12,14 @@
       font-weight: bold;
       text-decoration: none;
       font-family: Verdana;
+      display: inline-block;
     }
   </style>
 </head>
 
 <body>
 <div id = "wrapper1">{% for emotion in emotions %}
-  <a class="buttonish" href="/emotion?emotion={{emotion}}">{{emotion}}</a>-->
+  <a class="buttonish" href="/emotion?emotion={{emotion}}">{{emotion}}</a>
   <!--<button class="button" onclick="handleEmotion('{{emotion}}', this)">{{emotion}}</button>-->
   {% endfor %}
 </div>
