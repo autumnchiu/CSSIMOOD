@@ -111,8 +111,8 @@ class aboutpageHandler(webapp2.RequestHandler):
 		about_template = JINJA_ENV.get_template('templates/about.html')
 		self.response.write(about_template.render())
 
-class dailyLog(webapp2.RequestHandler):
-    def post(self):
+# class dailyLog(webapp2.RequestHandler):
+#     def post(self):
 
 class StyleHandler(webapp2.RequestHandler):
     def get(self):
