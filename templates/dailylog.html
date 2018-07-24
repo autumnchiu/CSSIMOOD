@@ -1,54 +1,50 @@
 <head>
   LOGS!
-  <link rel="stylesheet" href="logs.css">
+  <link rel="stylesheet" href="static/logs.css">
 </head>
 <body>
-<div class="month">
-  <ul>
-    <li class="prev">&#10094;</li>
-    <li class="next">&#10095;</li>
-    <li>july<br><span style="font-size:18px">2018</span></li>
+  <section class="title-bar">
+    <button class="title-bar__burger">
+      <span class="burger__lines">Toggle Menu</span>
+    </button>
+    <span class="title-bar__year">
+      Calendr > {{month}} {{year}}
+    </span>
+    <span class="title-bar__month">
+      Month
+    </span>
+    <div class="title-bar__controls">
+      <div class="title-bar__minimize"></div>
+      <div class="title-bar__maximize"></div>
+      <div class="title-bar__close"></div>
+    </div>
+  </section>
+  <div class="month">
+    <ul>
+      <li class="prev">&#10094;</li>
+      <li class="next">&#10095;</li>
+      <li>{{month}}<br><span style="font-size:18px">{{year}}</span></li>
+    </ul>
+  </div>
+
+  <ul id="calendar_holder">
+    <table cellspacing="0" width='100%' height='100%'>
+      <tr class="weekdays">
+        <td><li>Mo</li></td>
+        <td><li>Tu</li></td>
+        <td><li>We</li></td>
+        <td><li>Th</li></td>
+        <td><li>Fr</li></td>
+        <td><li>Sa</li></td>
+        <td><li>Su</li></td>
+      </tr>
+      {% for week in weeks_in_month %}
+      <tr>
+        {% for day in week %}
+        <td class="row button{{day}}"><button class="button">{{day}}</button></td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
   </ul>
-</div>
-
-<ul class="weekdays">
-  <li>Mo</li>
-  <li>Tu</li>
-  <li>We</li>
-  <li>Th</li>
-  <li>Fr</li>
-  <li>Sa</li>
-  <li>Su</li>
-</ul>
-
-<ul class="days">
-  <li>1</li>
-  <li>2</li>
-  <li>3</li>
-  <li>4</li>
-  <li>5</li>
-  <li>6</li>
-  <li>7</li>
-  <li>8</li>
-  <li>9</li>
-  <li>10</li>
-  <li>12</li>
-  <li>13</li>
-  <li>14</li>
-  <li>15</li>
-  <li>16</li>
-  <li>17</li>
-  <li>18</li>
-  <li>19</li>
-  <li>20</li>
-  <li>21</li>
-  <li>22</li>
-  <li><span class="active">23</span></li>
-  <li>24</li>
-  <li>25</li>
-  <li>26</li>
-  <li>27</li>
-  <li>28</li>
-  <li>29</li>
-</ul>
-</body>
+  </body>
