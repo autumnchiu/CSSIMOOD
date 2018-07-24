@@ -114,7 +114,7 @@ class dailyLog(webapp2.RequestHandler):
         self.redirect('/dailylog')
 
     def get(self):
-		about_template = JINJA_ENV.get_template('templates/about.html')
+		about_template = JINJA_ENV.get_template('templates/table/index.html')
 		self.response.write(about_template.render())
 
 class StyleHandler(webapp2.RequestHandler):
