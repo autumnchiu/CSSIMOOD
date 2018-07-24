@@ -63,6 +63,10 @@ class EmotionHandler(webapp2.RequestHandler):
         emotionpage = JINJA_ENV.get_template('templates/emotionpage.html')
         self.response.write(emotionpage.render(emotion=my_emotion))
 
+class submitReason(webapp2.RequestHandler):
+    def post(self):
+        the_fav_food = self.request.get('answer')
+
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/homepage', homePage),
