@@ -105,10 +105,14 @@ class CalendarHandler(webapp2.RequestHandler):
 		]
 		}
 		self.response.write(calendar_template.render(var))
+
 class aboutpageHandler(webapp2.RequestHandler):
 	def get(self):
 		about_template = JINJA_ENV.get_template('templates/about.html')
 		self.response.write(about_template.render())
+
+class dailyLog(webapp2.RequestHandler):
+    def post(self):
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
