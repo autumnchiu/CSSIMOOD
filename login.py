@@ -3,19 +3,20 @@ from google.appengine.ext import ndb
 import webapp2
 import jinja2
 import os
+import datetime
 
 JINJA_ENV = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
 	extensions = ['jinja2.ext.autoescape'],
 	autoescape =True
-
 )
 
 class Feelings(ndb.Model):
     chosen_emotion = ndb.StringProperty();
     chosen_intensity = ndb.IntegerProperty();
     chosen_reason = ndb.StringProperty();
-p = Feelings(chosen_emotion = "angry", chosen_intensity = 7, chosen_reason="I hate my life")
+    chosen_time = ndb.StringProperty();
+p = Feelings(chosen_emotion = "angry", chosen_intensity = 7, chosen_reason="I hate my life", chosen_time="September 7")
 p.put();
 
 class MainPage(webapp2.RequestHandler):
@@ -52,15 +53,21 @@ class homePage(webapp2.RequestHandler):
         content = JINJA_ENV.get_template('templates/homepage.html')
         params = {}
         params['emotions'] = [
-            'Angry',
-            'Sad',
-            'Happy',
-            'Annoyed',
-            'Tired',
-            'Excited',
-            'Sick',
-            'Ecstatic',
-            'Hungry'
+            'I laughed',
+            'I feel confident',
+            'I feel energetic',
+            'I smiled',
+            'I am thankful',
+            'I am annoyed',
+            'I feel like an imposter',
+            'I want to sleep',
+            'I am cranky',
+            'I am homesick',
+            'I feel vulnerable',
+            'I feel burnt out',
+            'I am jealous',
+            'I feel betrayed',
+            'I feel weak',
         ]
         self.response.write(content.render(params))
 
@@ -97,8 +104,10 @@ class dailyLog(webapp2.RequestHandler):
         answer = self.request.get('answer')
         intensityAnswer = int(self.request.get('intensityAnswer'))
         my_emotion = self.request.get('my_emotion')
+        self.timestamp = datetime.datetime.now()
+        time = self.timestamp.strftime('%Y-%m-%d %H:%M:%S')
         #self.response.write(answer)
-        EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion)
+        EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion, chosen_time=time)
 		#e = Feelings(chosen_emotion = "sad", chosen_intensity = 3)
 		#e.put()
         EmotionData.put()
