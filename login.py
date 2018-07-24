@@ -1,4 +1,5 @@
 from google.appengine.api import users
+from google.appengine.ext import ndb
 import webapp2
 import jinja2
 import os
@@ -9,6 +10,15 @@ JINJA_ENV = jinja2.Environment(
 	autoescape =True
 
 )
+
+# NDB MODEL IS HERE ________________________________________________
+class Feelings(ndb.Model):
+    chosen_emotion = ndb.StringProperty();
+    chosen_intensity = ndb.IntegerProperty();
+p = Feelings(chosen_emotion = "angry", chosen_intensity = 7)
+p.put();
+#p.put() works
+#___________________________________________________________________
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -63,13 +73,48 @@ class EmotionHandler(webapp2.RequestHandler):
         emotionpage = JINJA_ENV.get_template('templates/emotionpage.html')
         self.response.write(emotionpage.render(emotion=my_emotion))
 
-class submitReason(webapp2.RequestHandler):
-    def post(self):
-        the_fav_food = self.request.get('answer')
+# ______FAILED ATTEMPT TO LOG FEELINGS FROM EMOTION_HANDLER INPUT_______________________________
+
+	def get(self):
+		answer = self.request.get('answer')
+		intensityAnswer = self.request.get('intensityAnswer')
+		self.response.write(answer)
+		EmotionData =Feelings(chosen_emotion =answer,chosen_intensity =intensityAnswer)
+		e = Feelings(chosen_emotion = "sad", chosen_intensity = 3)
+		e.put()
+		EmotionData.put()
+		# e.put does not work
+		#EmotionData.put() does not work
+
+
+#________________________________________________________________________________________
+
+#________________________________________________________________________________________
+class CalendarHandler(webapp2.RequestHandler):
+	def get(self):
+		calendar_template = JINJA_ENV.get_template('templates/dailylog.html')
+		var = {
+		'month': 'July',
+		'year': '2018',
+		'weeks_in_month': [
+		[1,2,3,4,5,6,7],
+		[8,9,10,11,12,13,14],
+		[15,16,17,18,19,20,21],
+		[22,23,24,25,26,27,28],
+		[29,30,31]
+		]
+		}
+		self.response.write(calendar_template.render(var))
+class aboutpageHandler(webapp2.RequestHandler):
+	def get(self):
+		about_template = JINJA_ENV.get_template('templates/about.html')
+		self.response.write(about_template.render())
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/homepage', homePage),
     ('/admin', AdminPage),
     ('/emotion', EmotionHandler),
+	('/calendar', CalendarHandler),
+	('/about', aboutpageHandler),
 ], debug=True)
