@@ -26,8 +26,9 @@
     <a href = "/homepage">HOMEPAGE</a>
   </div>
 
-<div id = "wrapper1">{% for emotion in emotions %}
-  <a class="button" href="/emotion?emotion={{emotion}}">{{emotion}}</a>
+<div id = "wrapper1">{% for emotion,description in emotions.iteritems() %}
+  <a class="button" href="/emotion?emotion={{emotion}}" style="background-color: {{ description.color }}">{{emotion}}</a>
+  <!-- <p> {{ description.feeling }} - {{ description.color }}</p> -->
   <!--<button class="button" onclick="handleEmotion('{{emotion}}', this)">{{emotion}}</button>-->
   {% endfor %}
 </div>
