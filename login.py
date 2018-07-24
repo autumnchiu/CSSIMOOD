@@ -114,6 +114,11 @@ class aboutpageHandler(webapp2.RequestHandler):
 class dailyLog(webapp2.RequestHandler):
     def post(self):
 
+class StyleHandler(webapp2.RequestHandler):
+    def get(self):
+        with open('templates/logs.css', 'r') as f:
+            self.response.write(f.read())
+
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/homepage', homePage),
@@ -121,4 +126,5 @@ app = webapp2.WSGIApplication([
     ('/emotion', EmotionHandler),
 	('/calendar', CalendarHandler),
 	('/about', aboutpageHandler),
+    ('/logs.css', StyleHandler)
 ], debug=True)
