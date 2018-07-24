@@ -51,25 +51,61 @@ class AdminPage(webapp2.RequestHandler):
 class homePage(webapp2.RequestHandler):
     def get(self):
         content = JINJA_ENV.get_template('templates/homepage.html')
-        params = {}
-        params['emotions'] = [
-            'I laughed',
-            'I feel confident',
-            'I feel energetic',
-            'I smiled',
-            'I am thankful',
-            'I am annoyed',
-            'I feel like an imposter',
-            'I want to sleep',
-            'I am cranky',
-            'I am homesick',
-            'I feel vulnerable',
-            'I feel burnt out',
-            'I am jealous',
-            'I feel betrayed',
-            'I feel weak',
-        ]
-        self.response.write(content.render(params))
+        description = {
+        'I laughed': {'feeling': 'joyful',
+                      'color': '#FF0000'},
+        'I feel confident': {'feeling': 'powerful',
+                             'color': '#FF0000'},
+        'I feel energetic': {'feeling':'joyful',
+                             'color': '#FF0000'},
+        'I smiled': {'feeling': 'joyful',
+                     'color':'#FF0000'},
+        'I am thankful': {'feeling': 'peaceful',
+                          'color': '#FF0000'},
+        'I am annoyed': {'feeling':'mad',
+                         'color':'#FF0000'},
+        'I feel like an imposter': {'feeling':'sad',
+                                    'color':'#FF0000'},
+        'I am embarassed': {'feeling':'scared',
+                            'color':'#FF0000'},
+        'I am cranky': {'feeling':'mad',
+                        'color': '#FF0000'},
+        'I am homesick': {'feeling':'sad',
+                            'color':'#FF0000'},
+        'I feel vulnerable': {'feeling':'scared',
+                              'color':'#FF0000'},
+        'I feel burnt out': {'feeling':'sad',
+                             'color':'#FF0000'},
+        'I feel appreciated': {'feeling': 'powerful',
+                                'color':'#FF0000'},
+        'I feel betrayed': {'feeling': 'mad',
+                            'color':'#FF0000'},
+        'I feel helpless': {'feeling': 'scared',
+                            'color':'#FF0000'},
+        'I am content': {'feeling':'peaceful',
+                         'color':'#FF0000'},
+        'I feel relaxed': {'feeling': 'peaceful',
+                           'color':'#FF0000'},
+
+        }
+        # params['emotions'] = [
+        #     'I laughed',
+        #     'I feel confident',
+        #     'I feel energetic',
+        #     'I smiled',
+        #     'I am thankful',
+        #     'I am annoyed',
+        #     'I feel like an imposter',
+        #     'I want to sleep',
+        #     'I am cranky',
+        #     'I am homesick',
+        #     'I feel vulnerable',
+        #     'I feel burnt out',
+        #     'I am jealous',
+        #     'I feel betrayed',
+        #     'I feel weak',
+        # ]
+        self.response.write(content.render(emotions=description))
 
 class EmotionHandler(webapp2.RequestHandler):
     def dispatch(self):
