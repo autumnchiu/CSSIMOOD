@@ -4,6 +4,7 @@ import webapp2
 import jinja2
 import os
 import datetime
+#from html import HTML
 
 JINJA_ENV = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -16,8 +17,8 @@ class Feelings(ndb.Model):
     chosen_intensity = ndb.IntegerProperty();
     chosen_reason = ndb.StringProperty();
     chosen_time = ndb.StringProperty();
-p = Feelings(chosen_emotion = "angry", chosen_intensity = 7, chosen_reason="I hate my life", chosen_time="September 7")
-p.put();
+#p = Feelings(chosen_emotion = "angry", chosen_intensity = 7, chosen_reason="I hate my life", chosen_time="September 7")
+#p.put();
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -150,8 +151,14 @@ class dailyLog(webapp2.RequestHandler):
         self.redirect('/dailylog')
 
     def get(self):
-		about_template = JINJA_ENV.get_template('templates/table/index.html')
-		self.response.write(about_template.render())
+		table_template = JINJA_ENV.get_template('templates/table/index.html')
+		tableData = Feelings.query().fetch()
+		#htmlcode = HTML.table(tableData)
+
+		#tableData.chosen_emotion = chosen_emotion
+		#self.response.write(tableData)
+		#for feeling in tableData
+		self.response.write(table_template.render(tableData = tableData))
 
 class StyleHandler(webapp2.RequestHandler):
     def get(self):
