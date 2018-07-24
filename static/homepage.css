@@ -87,9 +87,14 @@ body {
 h1{
   background-color: #35662F;
   color: white;
-  margin-left: 230px;
+  margin-left: 300px;
   margin-right: 250px;
   margin-top: 50px;
   padding: 2%;
   text-align: center;
+}
+
+h2 {
+  margin-left: 300px;
+  margin-right: 10%;
 }

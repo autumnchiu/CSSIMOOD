@@ -1,4 +1,5 @@
 from google.appengine.api import users
+from google.appengine.ext import ndb
 import webapp2
 import jinja2
 import os
@@ -9,6 +10,15 @@ JINJA_ENV = jinja2.Environment(
 	autoescape =True
 
 )
+
+# NDB MODEL IS HERE ________________________________________________
+class Feelings(ndb.Model):
+    chosen_emotion = ndb.StringProperty();
+    chosen_intensity = ndb.IntegerProperty();
+p = Feelings(chosen_emotion = "angry", chosen_intensity = 7)
+p.put();
+#p.put() works
+#___________________________________________________________________
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -63,6 +73,23 @@ class EmotionHandler(webapp2.RequestHandler):
         emotionpage = JINJA_ENV.get_template('templates/emotionpage.html')
         self.response.write(emotionpage.render(emotion=my_emotion))
 
+# ______FAILED ATTEMPT TO LOG FEELINGS FROM EMOTION_HANDLER INPUT_______________________________
+
+	def get(self):
+		answer = self.request.get('answer')
+		intensityAnswer = self.request.get('intensityAnswer')
+		self.response.write(answer)
+		EmotionData =Feelings(chosen_emotion =answer,chosen_intensity =intensityAnswer)
+		e = Feelings(chosen_emotion = "sad", chosen_intensity = 3)
+		e.put()
+		EmotionData.put()
+		# e.put does not work
+		#EmotionData.put() does not work
+
+
+#________________________________________________________________________________________
+
+#________________________________________________________________________________________
 class CalendarHandler(webapp2.RequestHandler):
 	def get(self):
 		calendar_template = JINJA_ENV.get_template('templates/dailylog.html')
@@ -79,10 +106,18 @@ class CalendarHandler(webapp2.RequestHandler):
 		}
 		self.response.write(calendar_template.render(var))
 
-class StyleHandler(webapp2.RequestHandler):
+class aboutpageHandler(webapp2.RequestHandler):
 	def get(self):
-		with open('templates/logs.css', 'r') as f:
-			self.response.write(f.read())
+		about_template = JINJA_ENV.get_template('templates/about.html')
+		self.response.write(about_template.render())
+
+class dailyLog(webapp2.RequestHandler):
+    def post(self):
+
+class StyleHandler(webapp2.RequestHandler):
+    def get(self):
+        with open('templates/logs.css', 'r') as f:
+            self.response.write(f.read())
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
@@ -90,5 +125,6 @@ app = webapp2.WSGIApplication([
     ('/admin', AdminPage),
     ('/emotion', EmotionHandler),
 	('/calendar', CalendarHandler),
-	('/logs.css', StyleHandler),
+	('/about', aboutpageHandler),
+    ('/logs.css', StyleHandler)
 ], debug=True)
