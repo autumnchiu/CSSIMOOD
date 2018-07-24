@@ -85,7 +85,9 @@ body {
     .sidenav {padding-top: 15px;}
     .sidenav a {font-size: 18px;}
 }
-
+/* #promote{
+  text-align: center;
+} */
 h1{
   background-color: #35662F;
   color: white;
@@ -100,4 +102,16 @@ h1{
 h2 {
   margin-left: 300px;
   margin-right: 10%;
+  text-align: 100%;
+  line-height: 50px;
+  vertical-align: baseline;
+  font-size: 20;
+}
+
+#icontitle{
+  margin-left: 300px;
+  margin-right: 250px;
+  text-align: center;
+  font-size: 100px;
+  border: 3px;
 }
