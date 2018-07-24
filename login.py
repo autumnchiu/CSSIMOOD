@@ -79,10 +79,16 @@ class CalendarHandler(webapp2.RequestHandler):
 		}
 		self.response.write(calendar_template.render(var))
 
+class StyleHandler(webapp2.RequestHandler):
+	def get(self):
+		with open('templates/logs.css', 'r') as f:
+			self.response.write(f.read())
+
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/homepage', homePage),
     ('/admin', AdminPage),
     ('/emotion', EmotionHandler),
 	('/calendar', CalendarHandler),
+	('/logs.css', StyleHandler),
 ], debug=True)
