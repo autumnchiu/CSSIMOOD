@@ -26,8 +26,12 @@
     border-radius: 50%;
 
 }
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 
-
+#spiral-up {
+  color:black;
+  font-family: 'Raleway', sans-serif;
+}
 body {
    background-color: #ECFFED
  }
@@ -128,4 +132,12 @@ h2 {
   text-align: center;
   font-size: 100px;
   border: 3px;
+}
+
+#logo{
+  width: 140px;
+  height: 140px;
+  top: 0px;
+  right: 0px;
+  position: fixed;
 }
