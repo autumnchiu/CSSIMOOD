@@ -66,18 +66,15 @@ class Feelings(ndb.Model):
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
-        # [START user_details]
         user = users.get_current_user()
         if user:
             logout_url = users.create_logout_url('/')
             greeting = 'Welcome! (<a href="{}">sign out</a>)'.format(
-                 logout_url)
-            #Redirect to Main Page
+                logout_url)
             self.redirect('/homepage')
         else:
             login_url = users.create_login_url('/')
             greeting = '<a href="{}">Sign in</a>'.format(login_url)
-        # [END user_details]
         self.response.write(
             '<html><body>{}</body></html>'.format(greeting))
 
@@ -95,9 +92,9 @@ class AdminPage(webapp2.RequestHandler):
 class homePage(webapp2.RequestHandler):
     def get(self):
         content = JINJA_ENV.get_template('templates/homepage.html')
-		logout_url = users.create_logout_url('/')
-		signout = 'Sign Out'
-		link = logout_url
+        logout_url = users.create_logout_url('/')
+        signout = 'Sign Out'
+        link = logout_url
 
         # description = {
         # 'I laughed': {'feeling': 'joyful',
@@ -184,42 +181,35 @@ class EmotionHandler(webapp2.RequestHandler):
 # 		self.response.write(calendar_template.render(var))
 
 class aboutpageHandler(webapp2.RequestHandler):
-	def get(self):
-		about_template = JINJA_ENV.get_template('templates/about.html')
-		self.response.write(about_template.render())
+    def get(self):
+        about_template = JINJA_ENV.get_template('templates/about.html')
+        self.response.write(about_template.render())
 
 class dailyLog(webapp2.RequestHandler):
     def post(self):
-		answer = self.request.get('answer')
-		intensityAnswer = int(self.request.get('intensityAnswer'))
-		my_emotion = self.request.get('my_emotion')
-		time = datetime.datetime.now()
+        answer = self.request.get('answer')
+        intensityAnswer = int(self.request.get('intensityAnswer'))
+        my_emotion = self.request.get('my_emotion')
+        time = datetime.datetime.now()
         #time = self.timestamp.strftime('%Y-%m-%d %H:%M:%S')
         #self.response.write(answer)
-		EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion, chosen_time=time, user = users.get_current_user().user_id())
+        EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion, chosen_time=time, user = users.get_current_user().user_id())
 		#e = Feelings(chosen_emotion = "sad", chosen_intensity = 3)
 		#e.put()
-		EmotionData.put()
-		self.redirect('/dailylog')
+        EmotionData.put()
+        self.redirect('/dailylog')
 
     def get(self):
+        table_template = JINJA_ENV.get_template('templates/table/index.html')
+        today = datetime.datetime.today()
+        date = datetime.datetime(today.year,today.month,today.day)
+        print date
 
-		table_template = JINJA_ENV.get_template('templates/table/index.html')
-		today = datetime.datetime.today()
-		date = datetime.datetime(today.year,today.month,today.day)
-		print date
-
-		tableData = Feelings.query(
+        tableData = Feelings.query(
 
     		ndb.AND(Feelings.chosen_time >= date,
             Feelings.chosen_time < date + datetime.timedelta(days=1), Feelings.user == users.get_current_user().user_id())).order(Feelings.chosen_time)
-		#tableData = Feelings.query(Feelings.chosen_time.date() == datetime.today().date()).order(Feelings.chosen_time)
-		#htmlcode = HTML.table(tableData)
-
-		#tableData.chosen_emotion = chosen_emotion
-		#self.response.write(tableData)
-		#for feeling in tableData
-		self.response.write(table_template.render(tableData = tableData))
+        self.response.write(table_template.render(tableData = tableData))
 
 class StyleHandler(webapp2.RequestHandler):
     def get(self):
