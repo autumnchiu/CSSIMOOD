@@ -208,7 +208,7 @@ class dailyLog(webapp2.RequestHandler):
 		#self.response.write(tableData)
 		#for feeling in tableData
 		self.response.write(table_template.render(tableData = tableData))
-
+\
 class StyleHandler(webapp2.RequestHandler):
     def get(self):
         with open('templates/logs.css', 'r') as f:
