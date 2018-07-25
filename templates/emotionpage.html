@@ -9,7 +9,7 @@
   <body>
     <div class = "questioncontainer" style="background-color: {{color}}">
     <h1 id = "greetingmessage">You chose: {{emotion}}. Can you explain why?</h1>
-    <form method="post" action="/dailylog">
+    <form method="post" action="/dailylog" >
       <input type="text" name="answer"></input>
       <input type="hidden" name="my_emotion" value="{{emotion}}"></input>
       <input type="submit" value="Submit">
