@@ -16,7 +16,7 @@ class Feelings(ndb.Model):
     chosen_emotion = ndb.StringProperty();
     chosen_intensity = ndb.IntegerProperty();
     chosen_reason = ndb.StringProperty();
-    chosen_time = ndb.StringProperty();
+    chosen_time = ndb.DateTimeProperty();
 #p = Feelings(chosen_emotion = "angry", chosen_intensity = 7, chosen_reason="I hate my life", chosen_time="September 7")
 #p.put();
 
@@ -141,21 +141,28 @@ class aboutpageHandler(webapp2.RequestHandler):
 
 class dailyLog(webapp2.RequestHandler):
     def post(self):
-        answer = self.request.get('answer')
-        intensityAnswer = int(self.request.get('intensityAnswer'))
-        my_emotion = self.request.get('my_emotion')
-        self.timestamp = datetime.datetime.now()
-        time = self.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+		answer = self.request.get('answer')
+		intensityAnswer = int(self.request.get('intensityAnswer'))
+		my_emotion = self.request.get('my_emotion')
+		time = datetime.datetime.now()
+        #time = self.timestamp.strftime('%Y-%m-%d %H:%M:%S')
         #self.response.write(answer)
-        EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion, chosen_time=time)
+		EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion, chosen_time=time)
 		#e = Feelings(chosen_emotion = "sad", chosen_intensity = 3)
 		#e.put()
-        EmotionData.put()
-        self.redirect('/dailylog')
+		EmotionData.put()
+		self.redirect('/dailylog')
 
     def get(self):
+
 		table_template = JINJA_ENV.get_template('templates/table/index.html')
-		tableData = Feelings.query().fetch()
+		today = datetime.datetime.today()
+		date = datetime.datetime(today.year,today.month,today.day)
+		print date
+		tableData = Feelings.query(
+    		ndb.AND(Feelings.chosen_time >= date,
+            Feelings.chosen_time < date + datetime.timedelta(days=1))).order(Feelings.chosen_time)
+		#tableData = Feelings.query(Feelings.chosen_time.date() == datetime.today().date()).order(Feelings.chosen_time)
 		#htmlcode = HTML.table(tableData)
 
 		#tableData.chosen_emotion = chosen_emotion
