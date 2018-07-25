@@ -15,14 +15,14 @@ JINJA_ENV = jinja2.Environment(
 
 DESCRIPTION = {
 'I laughed': {'feeling': 'joyful',
-              'color': '#EA76FF'
-			  'index': 1},
+              'color': '#EA76FF',
+			  'index': '1'},
 'I feel energetic': {'feeling':'joyful',
-                     'color': '#FF43CA'
-					 'index': 1},
+                     'color': '#FF43CA',
+					 'index': '1'},
 'I smiled': {'feeling': 'joyful',
-             'color':'#FF184D'
-			 'index': 1},
+             'color':'#FF184D',
+			 'index': '1'},
 'I feel confident': {'feeling': 'powerful',
                      'color': '#FFCB33'},
 'I feel appreciated': {'feeling': 'powerful',
@@ -60,7 +60,7 @@ class Feelings(ndb.Model):
     chosen_intensity = ndb.IntegerProperty();
     chosen_reason = ndb.StringProperty();
     chosen_time = ndb.DateTimeProperty();
-	user = ndb.StringProperty();
+    user = ndb.StringProperty();
 #p = Feelings(chosen_emotion = "angry", chosen_intensity = 7, chosen_reason="I hate my life", chosen_time="September 7")
 #p.put();
 
@@ -71,7 +71,7 @@ class MainPage(webapp2.RequestHandler):
         if user:
             logout_url = users.create_logout_url('/')
             greeting = 'Welcome! (<a href="{}">sign out</a>)'.format(
-                logout_url)
+                 logout_url)
             #Redirect to Main Page
             self.redirect('/homepage')
         else:
@@ -98,6 +98,7 @@ class homePage(webapp2.RequestHandler):
 		logout_url = users.create_logout_url('/')
 		signout = 'SIGNOUT'
 		link = logout_url
+
         # description = {
         # 'I laughed': {'feeling': 'joyful',
         #               'color': '#EA76FF'},
@@ -155,7 +156,9 @@ class homePage(webapp2.RequestHandler):
         #     'I feel betrayed',
         #     'I feel weak',
         # ]
+
         self.response.write(content.render(emotions=DESCRIPTION, signout=signout, link=link))
+
 
 class EmotionHandler(webapp2.RequestHandler):
     def dispatch(self):
@@ -205,7 +208,9 @@ class dailyLog(webapp2.RequestHandler):
 		today = datetime.datetime.today()
 		date = datetime.datetime(today.year,today.month,today.day)
 		print date
+
 		tableData = Feelings.query(
+
     		ndb.AND(Feelings.chosen_time >= date,
             Feelings.chosen_time < date + datetime.timedelta(days=1), Feelings.user == users.get_current_user().user_id())).order(Feelings.chosen_time)
 		#tableData = Feelings.query(Feelings.chosen_time.date() == datetime.today().date()).order(Feelings.chosen_time)
@@ -223,19 +228,15 @@ class StyleHandler(webapp2.RequestHandler):
 
 class dailyGraphHandler(webapp2.RequestHandler):
     def get(self):
-        # xAxis = ["1500","1600","1700","1750","1800","1850","1900","1950","1999","2050"]
-		xAxis = []
-		allTimes = Feelings.query()
-		#allTimes = query.fetch()
-		for time in sorted(allTimes, key=lambda t: t.chosen_time):
-			print(time.chosen_time)
-			print(datetime.datetime.strftime(time.chosen_time, '%H:%M'))
-			xAxis.append(datetime.datetime.strftime(time.chosen_time, '%H:%M'))
-			#xAxis.append(time.chosen_time)
-
-		data = [-1,3,-15,2,7,26,82,172,312,433]
-		dailygraph = JINJA_ENV.get_template('templates/dailygraph.html')
-		self.response.write(dailygraph.render(xAxis=','.join(['"%s"'% x for x in xAxis]), data=data))
+        xAxis= []
+        allTimes = Feelings.query()
+        for time in sorted(allTimes, key = lambda t: t.chosen_time):
+            print(time.chosen_time)
+            print(datetime.datetime.strfttime(time.chosen_time, '%H:%M'))
+            xAxis.append(datetime.datetime.strfttime(time.chosen_time, '%H:%M'))
+        data = [-1,3,-15,2,7,26,82,172,312,433]
+        dailygraph = JINJA_ENV.get_template('templates/dailygraph.html')
+        self.response.write(dailygraph.render(xAxis = ','.join(['"%s"'% x for x in xAxis]), data = data))
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
