@@ -2,7 +2,7 @@
     /* $button-dimmension: height *.2; */
     height: 20vw;
     width: 20vw;
-    background-color: #4CAF50;
+    background-color: #FFDDC0;
     border: none;
     color: white;
     padding: 20px;
@@ -29,7 +29,7 @@
 
 
 body {
-   background-color: #FFFFFF
+   background-color: #ECFFED
  }
 
 /* .buttons {
