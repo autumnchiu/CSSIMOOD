@@ -226,6 +226,7 @@ class StyleHandler(webapp2.RequestHandler):
 
 class dailyGraphHandler(webapp2.RequestHandler):
     def get(self):
+<<<<<<< HEAD
         xAxis= []
         allTimes = Feelings.query()
         for time in sorted(allTimes, key = lambda t: t.chosen_time):
@@ -235,6 +236,13 @@ class dailyGraphHandler(webapp2.RequestHandler):
         data = [-1,3,-15,2,7,26,82,172,312,433]
         dailygraph = JINJA_ENV.get_template('templates/dailygraph.html')
         self.response.write(dailygraph.render(xAxis = ','.join(['"%s"'% x for x in xAxis]), data = data))
+=======
+        # xAxis = ["1500","1600","1700","1750","1800","1850","1900","1950","1999","2050"]
+        xAxis = Feelings.query(Feelings.chosen_time)
+        data = [-1,3,-15,2,7,26,82,172,312,433]
+        dailygraph = JINJA_ENV.get_template('templates/dailygraph.html')
+        self.response.write(dailygraph.render(xAxis=xAxis, data=data))
+>>>>>>> b65cbb9932f18ef5b759be51bb49a0300cedaedd
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),

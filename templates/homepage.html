@@ -3,6 +3,7 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <link rel="stylesheet" href="static/homepage.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <script src="static/homepage.js" type="text/javascript"></script>
   <a href= "/homepage">
   <img id=logo src="static/spiral-up.png">
@@ -21,15 +22,37 @@
 </head>
 
 <body>
-  <h1>LOG YOUR FEELINGS</h1>
+  <h1 id="Ralewayfont">LOG YOUR FEELINGS</h1>
   <!-- Side navigation -->
-  <div class="sidenav">
+  <!-- <div class="sidenav">
     <a href = "/homepage">HOMEPAGE</a>
     <a href="/dailylog">DAILY LOG</a>
     <a href="/about">ABOUT</a>
+<<<<<<< HEAD
     <a href= {{link}}>{{signout}}</p>
   </div>
+=======
+  </div> -->
 
+<div>
+  <nav role='navigation'>
+      <div id="menuToggle">
+
+        <input type="checkbox" />
+        <span style="background:black;"></span>
+        <span style="background:black;"></span>
+        <span style="background:black;"></span>
+        <ul id="menu">
+          <a href="/homepage"><li>HomePage</li></a>
+          <a href="/dailylog"><li>Dailylog</li></a>
+          <a href="/about"><li>About</li></a>
+        </ul>
+>>>>>>> b65cbb9932f18ef5b759be51bb49a0300cedaedd
+
+      </div>
+    </nav>
+
+</div>
 <div id = "wrapper1">{% for emotion,description in emotions.iteritems() %}
   <a class="button" href="/emotion?emotion={{emotion}}" style="background-color: {{ description.color }}">{{emotion}}</a>
   <!-- <p> {{ description.feeling }} - {{ description.color }}</p> -->
