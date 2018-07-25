@@ -96,7 +96,7 @@ class homePage(webapp2.RequestHandler):
     def get(self):
         content = JINJA_ENV.get_template('templates/homepage.html')
 		logout_url = users.create_logout_url('/')
-		signout = 'SIGNOUT'
+		signout = 'Sign Out'
 		link = logout_url
 
         # description = {
