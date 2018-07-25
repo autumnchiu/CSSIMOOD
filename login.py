@@ -55,7 +55,7 @@ class Feelings(ndb.Model):
     chosen_emotion = ndb.StringProperty();
     chosen_intensity = ndb.IntegerProperty();
     chosen_reason = ndb.StringProperty();
-    chosen_time = ndb.StringProperty();
+    chosen_time = ndb.DateTimeProperty();
 #p = Feelings(chosen_emotion = "angry", chosen_intensity = 7, chosen_reason="I hate my life", chosen_time="September 7")
 #p.put();
 
@@ -157,21 +157,21 @@ class EmotionHandler(webapp2.RequestHandler):
         emotionpage = JINJA_ENV.get_template('templates/emotionpage.html')
         self.response.write(emotionpage.render(emotion=my_emotion, color = DESCRIPTION[my_emotion]['color']))
 
-class CalendarHandler(webapp2.RequestHandler):
-	def get(self):
-		calendar_template = JINJA_ENV.get_template('templates/dailylog.html')
-		var = {
-		'month': 'July',
-		'year': '2018',	
-		'weeks_in_month': [
-		[1,2,3,4,5,6,7],
-		[8,9,10,11,12,13,14],
-		[15,16,17,18,19,20,21],
-		[22,23,24,25,26,27,28],
-		[29,30,31]
-		]
-		}
-		self.response.write(calendar_template.render(var))
+# class CalendarHandler(webapp2.RequestHandler):
+# 	def get(self):
+# 		calendar_template = JINJA_ENV.get_template('templates/dailylog.html')
+# 		var = {
+# 		'month': 'July',
+# 		'year': '2018',
+# 		'weeks_in_month': [
+# 		[1,2,3,4,5,6,7],
+# 		[8,9,10,11,12,13,14],
+# 		[15,16,17,18,19,20,21],
+# 		[22,23,24,25,26,27,28],
+# 		[29,30,31]
+# 		]
+# 		}
+# 		self.response.write(calendar_template.render(var))
 
 class aboutpageHandler(webapp2.RequestHandler):
 	def get(self):
@@ -180,40 +180,56 @@ class aboutpageHandler(webapp2.RequestHandler):
 
 class dailyLog(webapp2.RequestHandler):
     def post(self):
-        answer = self.request.get('answer')
-        intensityAnswer = int(self.request.get('intensityAnswer'))
-        my_emotion = self.request.get('my_emotion')
-        self.timestamp = datetime.datetime.now()
-        time = self.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+		answer = self.request.get('answer')
+		intensityAnswer = int(self.request.get('intensityAnswer'))
+		my_emotion = self.request.get('my_emotion')
+		time = datetime.datetime.now()
+        #time = self.timestamp.strftime('%Y-%m-%d %H:%M:%S')
         #self.response.write(answer)
-        EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion, chosen_time=time)
+		EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion, chosen_time=time)
 		#e = Feelings(chosen_emotion = "sad", chosen_intensity = 3)
 		#e.put()
-        EmotionData.put()
-        self.redirect('/dailylog')
+		EmotionData.put()
+		self.redirect('/dailylog')
 
     def get(self):
+
 		table_template = JINJA_ENV.get_template('templates/table/index.html')
-		tableData = Feelings.query().fetch()
+		today = datetime.datetime.today()
+		date = datetime.datetime(today.year,today.month,today.day)
+		print date
+		tableData = Feelings.query(
+    		ndb.AND(Feelings.chosen_time >= date,
+            Feelings.chosen_time < date + datetime.timedelta(days=1))).order(Feelings.chosen_time)
+		#tableData = Feelings.query(Feelings.chosen_time.date() == datetime.today().date()).order(Feelings.chosen_time)
 		#htmlcode = HTML.table(tableData)
 
 		#tableData.chosen_emotion = chosen_emotion
 		#self.response.write(tableData)
 		#for feeling in tableData
 		self.response.write(table_template.render(tableData = tableData))
-
+\
 class StyleHandler(webapp2.RequestHandler):
     def get(self):
         with open('templates/logs.css', 'r') as f:
             self.response.write(f.read())
+
+class dailyGraphHandler(webapp2.RequestHandler):
+    def get(self):
+        # xAxis = ["1500","1600","1700","1750","1800","1850","1900","1950","1999","2050"]
+        xAxis = Feelings.query(Feelings.chosen_time)
+        data = [-1,3,-15,2,7,26,82,172,312,433]
+        dailygraph = JINJA_ENV.get_template('templates/dailygraph.html')
+        self.response.write(dailygraph.render(xAxis=xAxis, data=data))
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/homepage', homePage),
     ('/admin', AdminPage),
     ('/emotion', EmotionHandler),
-	('/calendar', CalendarHandler),
+	# ('/calendar', CalendarHandler),
 	('/about', aboutpageHandler),
     ('/logs.css', StyleHandler),
     ('/dailylog', dailyLog),
+    ('/dailygraph', dailyGraphHandler)
 ], debug=True)

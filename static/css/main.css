@@ -43,9 +43,28 @@ a:focus {
 a:hover {
 	text-decoration: none;
 }
+h1 {
+  font-family: sans-serif;
+	margin: 0px;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+h1 :focus {
+	outline: none !important;
+}
+
+h1:hover {
+	text-decoration: none;
+}
 
 /* ------------------------------------ */
-h1,h2,h3,h4,h5,h6 {margin: 0px;}
+
+h2,h3,h4,h5,h6 {margin: 0px;}
 
 p {margin: 0px;}
 
