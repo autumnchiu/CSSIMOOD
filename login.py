@@ -162,7 +162,7 @@ class CalendarHandler(webapp2.RequestHandler):
 		calendar_template = JINJA_ENV.get_template('templates/dailylog.html')
 		var = {
 		'month': 'July',
-		'year': '2018',
+		'year': '2018',	
 		'weeks_in_month': [
 		[1,2,3,4,5,6,7],
 		[8,9,10,11,12,13,14],
