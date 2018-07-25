@@ -20,11 +20,20 @@
 	<link rel="stylesheet" type="text/css" href="static/css/util.css">
 	<link rel="stylesheet" type="text/css" href="static/css/main.css">
 <!--===============================================================================================-->
-<!-- <script type='text/javascript'>
+<script type='text/javascript'>
+function reload() {
 
-setTimeout("location.reload();",1000);
+	if (sessionStorage.getItem('page_reloaded')) {
+		return
+	}
 
-</script> -->
+	setTimeout("location.reload();",1000);
+	sessionStorage.setItem('page_reloaded',true)
+	console.log("reloaded")
+}
+reload()
+
+</script>
 
 </head>
 <body>
