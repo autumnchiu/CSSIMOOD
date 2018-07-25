@@ -157,21 +157,21 @@ class EmotionHandler(webapp2.RequestHandler):
         emotionpage = JINJA_ENV.get_template('templates/emotionpage.html')
         self.response.write(emotionpage.render(emotion=my_emotion, color = DESCRIPTION[my_emotion]['color']))
 
-class CalendarHandler(webapp2.RequestHandler):
-	def get(self):
-		calendar_template = JINJA_ENV.get_template('templates/dailylog.html')
-		var = {
-		'month': 'July',
-		'year': '2018',
-		'weeks_in_month': [
-		[1,2,3,4,5,6,7],
-		[8,9,10,11,12,13,14],
-		[15,16,17,18,19,20,21],
-		[22,23,24,25,26,27,28],
-		[29,30,31]
-		]
-		}
-		self.response.write(calendar_template.render(var))
+# class CalendarHandler(webapp2.RequestHandler):
+# 	def get(self):
+# 		calendar_template = JINJA_ENV.get_template('templates/dailylog.html')
+# 		var = {
+# 		'month': 'July',
+# 		'year': '2018',
+# 		'weeks_in_month': [
+# 		[1,2,3,4,5,6,7],
+# 		[8,9,10,11,12,13,14],
+# 		[15,16,17,18,19,20,21],
+# 		[22,23,24,25,26,27,28],
+# 		[29,30,31]
+# 		]
+# 		}
+# 		self.response.write(calendar_template.render(var))
 
 class aboutpageHandler(webapp2.RequestHandler):
 	def get(self):
@@ -214,13 +214,21 @@ class StyleHandler(webapp2.RequestHandler):
         with open('templates/logs.css', 'r') as f:
             self.response.write(f.read())
 
+class dailyGraphHandler(webapp2.RequestHandler):
+    def get(self):
+        labels = ["1500","1600","1700","1750","1800","1850","1900","1950","1999","2050"]
+        data = [-1,3,-15,2,7,26,82,172,312,433]
+        dailygraph = JINJA_ENV.get_template('templates/dailygraph.html')
+        self.response.write(dailygraph.render(labels=labels, data=data))
+
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/homepage', homePage),
     ('/admin', AdminPage),
     ('/emotion', EmotionHandler),
-	('/calendar', CalendarHandler),
+	# ('/calendar', CalendarHandler),
 	('/about', aboutpageHandler),
     ('/logs.css', StyleHandler),
     ('/dailylog', dailyLog),
+    ('/dailygraph', dailyGraphHandler)
 ], debug=True)
