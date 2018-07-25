@@ -12,6 +12,45 @@ JINJA_ENV = jinja2.Environment(
 	autoescape =True
 )
 
+DESCRIPTION = {
+'I laughed': {'feeling': 'joyful',
+              'color': '#EA76FF'},
+'I feel energetic': {'feeling':'joyful',
+                     'color': '#FF43CA'},
+'I smiled': {'feeling': 'joyful',
+             'color':'#FF184D'},
+'I feel confident': {'feeling': 'powerful',
+                     'color': '#FFCB33'},
+'I feel appreciated': {'feeling': 'powerful',
+                        'color':'#DA841D'},
+'I feel valuable': {'feeling': 'powerful',
+                        'color':'#FF4D09'},
+'I am thankful': {'feeling': 'peaceful',
+                  'color': '#ACFF3A'},
+'I am content': {'feeling':'peaceful',
+                 'color':'#8BDA33'},
+'I feel relaxed': {'feeling': 'peaceful',
+                   'color':'#62C74A'},
+'I feel burnt out': {'feeling':'sad',
+                     'color':'#91F6FF'},
+'I am homesick': {'feeling':'sad',
+                    'color':'#38FFAF'},
+'I feel like an imposter': {'feeling':'sad',
+                            'color':'#61FAFF'},
+'I am annoyed': {'feeling':'mad',
+                 'color':'#9890FF'},
+'I am cranky': {'feeling':'mad',
+                'color': '#817BD9'},
+'I feel betrayed': {'feeling': 'mad',
+                    'color':'#966FC4'},
+'I am embarassed': {'feeling':'scared',
+                    'color':'#96485C'},
+'I feel vulnerable': {'feeling':'scared',
+                      'color':'#BF4C47'},
+'I feel helpless': {'feeling': 'scared',
+                    'color':'#BF4047'},
+}
+
 class Feelings(ndb.Model):
     chosen_emotion = ndb.StringProperty();
     chosen_intensity = ndb.IntegerProperty();
@@ -52,46 +91,46 @@ class AdminPage(webapp2.RequestHandler):
 class homePage(webapp2.RequestHandler):
     def get(self):
         content = JINJA_ENV.get_template('templates/homepage.html')
-        description = {
-        'I laughed': {'feeling': 'joyful',
-                      'color': '#EA76FF'},
-        'I feel energetic': {'feeling':'joyful',
-                             'color': '#FF43CA'},
-        'I smiled': {'feeling': 'joyful',
-                     'color':'#FF184D'},
-        'I feel confident': {'feeling': 'powerful',
-                             'color': '#FFCB33'},
-        'I feel appreciated': {'feeling': 'powerful',
-                                'color':'#DA841D'},
-        'I feel valuable': {'feeling': 'powerful',
-                                'color':'#FF4D09'},
-        'I am thankful': {'feeling': 'peaceful',
-                          'color': '#ACFF3A'},
-        'I am content': {'feeling':'peaceful',
-                         'color':'#8BDA33'},
-        'I feel relaxed': {'feeling': 'peaceful',
-                           'color':'#62C74A'},
-        'I feel burnt out': {'feeling':'sad',
-                             'color':'#91F6FF'},
-        'I am homesick': {'feeling':'sad',
-                            'color':'#38FFAF'},
-        'I feel like an imposter': {'feeling':'sad',
-                                    'color':'#61FAFF'},
-        'I am annoyed': {'feeling':'mad',
-                         'color':'#9890FF'},
-        'I am cranky': {'feeling':'mad',
-                        'color': '#817BD9'},
-        'I feel betrayed': {'feeling': 'mad',
-                            'color':'#966FC4'},
-        'I am embarassed': {'feeling':'scared',
-                            'color':'#96485C'},
-        'I feel vulnerable': {'feeling':'scared',
-                              'color':'#BF4C47'},
-        'I feel helpless': {'feeling': 'scared',
-                            'color':'#BF4047'},
+        # description = {
+        # 'I laughed': {'feeling': 'joyful',
+        #               'color': '#EA76FF'},
+        # 'I feel energetic': {'feeling':'joyful',
+        #                      'color': '#FF43CA'},
+        # 'I smiled': {'feeling': 'joyful',
+        #              'color':'#FF184D'},
+        # 'I feel confident': {'feeling': 'powerful',
+        #                      'color': '#FFCB33'},
+        # 'I feel appreciated': {'feeling': 'powerful',
+        #                         'color':'#DA841D'},
+        # 'I feel valuable': {'feeling': 'powerful',
+        #                         'color':'#FF4D09'},
+        # 'I am thankful': {'feeling': 'peaceful',
+        #                   'color': '#ACFF3A'},
+        # 'I am content': {'feeling':'peaceful',
+        #                  'color':'#8BDA33'},
+        # 'I feel relaxed': {'feeling': 'peaceful',
+        #                    'color':'#62C74A'},
+        # 'I feel burnt out': {'feeling':'sad',
+        #                      'color':'#91F6FF'},
+        # 'I am homesick': {'feeling':'sad',
+        #                     'color':'#38FFAF'},
+        # 'I feel like an imposter': {'feeling':'sad',
+        #                             'color':'#61FAFF'},
+        # 'I am annoyed': {'feeling':'mad',
+        #                  'color':'#9890FF'},
+        # 'I am cranky': {'feeling':'mad',
+        #                 'color': '#817BD9'},
+        # 'I feel betrayed': {'feeling': 'mad',
+        #                     'color':'#966FC4'},
+        # 'I am embarassed': {'feeling':'scared',
+        #                     'color':'#96485C'},
+        # 'I feel vulnerable': {'feeling':'scared',
+        #                       'color':'#BF4C47'},
+        # 'I feel helpless': {'feeling': 'scared',
+        #                     'color':'#BF4047'},
 
 
-        }
+        # }
         # params['emotions'] = [
         #     'I laughed',
         #     'I feel confident',
@@ -109,14 +148,14 @@ class homePage(webapp2.RequestHandler):
         #     'I feel betrayed',
         #     'I feel weak',
         # ]
-        self.response.write(content.render(emotions=description))
+        self.response.write(content.render(emotions=DESCRIPTION))
 
 class EmotionHandler(webapp2.RequestHandler):
     def dispatch(self):
         my_emotion = self.request.get('emotion')
         #self.response.out.write('The emotion entered was: ' + my_emotion)
         emotionpage = JINJA_ENV.get_template('templates/emotionpage.html')
-        self.response.write(emotionpage.render(emotion=my_emotion))
+        self.response.write(emotionpage.render(emotion=my_emotion, color = DESCRIPTION[my_emotion]['color']))
 
 class CalendarHandler(webapp2.RequestHandler):
 	def get(self):
