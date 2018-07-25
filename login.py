@@ -14,14 +14,14 @@ JINJA_ENV = jinja2.Environment(
 
 DESCRIPTION = {
 'I laughed': {'feeling': 'joyful',
-              'color': '#EA76FF'
-              'index': 1},
+              'color': '#EA76FF',
+              'index': '1'},
 'I feel energetic': {'feeling':'joyful',
-                     'color': '#FF43CA'
-                     'index': 1},
+                     'color': '#FF43CA',
+                     'index': '1'},
 'I smiled': {'feeling': 'joyful',
-             'color':'#FF184D'
-             'index': 1},
+             'color':'#FF184D',
+             'index': '1'},
 'I feel confident': {'feeling': 'powerful',
                      'color': '#FFCB33'},
 'I feel appreciated': {'feeling': 'powerful',
@@ -97,7 +97,7 @@ class homePage(webapp2.RequestHandler):
         content = JINJA_ENV.get_template('templates/homepage.html')
 
         logout_url = users.create_logout_url('/')
-        signout = 'SIGNOUT'
+        signout = 'Sign out'
         link = logout_url
         # description = {
         # 'I laughed': {'feeling': 'joyful',
@@ -226,7 +226,6 @@ class StyleHandler(webapp2.RequestHandler):
 
 class dailyGraphHandler(webapp2.RequestHandler):
     def get(self):
-<<<<<<< HEAD
         xAxis= []
         allTimes = Feelings.query()
         for time in sorted(allTimes, key = lambda t: t.chosen_time):
@@ -236,13 +235,6 @@ class dailyGraphHandler(webapp2.RequestHandler):
         data = [-1,3,-15,2,7,26,82,172,312,433]
         dailygraph = JINJA_ENV.get_template('templates/dailygraph.html')
         self.response.write(dailygraph.render(xAxis = ','.join(['"%s"'% x for x in xAxis]), data = data))
-=======
-        # xAxis = ["1500","1600","1700","1750","1800","1850","1900","1950","1999","2050"]
-        xAxis = Feelings.query(Feelings.chosen_time)
-        data = [-1,3,-15,2,7,26,82,172,312,433]
-        dailygraph = JINJA_ENV.get_template('templates/dailygraph.html')
-        self.response.write(dailygraph.render(xAxis=xAxis, data=data))
->>>>>>> b65cbb9932f18ef5b759be51bb49a0300cedaedd
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
