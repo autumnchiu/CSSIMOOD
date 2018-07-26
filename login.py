@@ -156,10 +156,14 @@ class dailyLog(webapp2.RequestHandler):
         date = datetime(today.year,today.month,today.day)
         print date
 
+        logout_url = users.create_logout_url('/')
+        signout = 'Sign Out'
+        link = logout_url
+
         tableData = Feelings.query(
-    		ndb.AND(Feelings.chosen_time >= date,
+            ndb.AND(Feelings.chosen_time >= date,
             Feelings.chosen_time < date + timedelta(days=1), Feelings.user == users.get_current_user().user_id())).order(Feelings.chosen_time)
-        self.response.write(table_template.render(tableData = tableData))
+        self.response.write(table_template.render(tableData = tableData, link=link,signout=signout))
 
 class StyleHandler(webapp2.RequestHandler):
     def get(self):
