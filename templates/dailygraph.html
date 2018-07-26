@@ -2,9 +2,27 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="static/dailygraph.css">
     <title>Daily Graph</title>
   </head>
   <body>
+    <nav role='navigation'>
+        <div id="menuToggle">
+
+          <input type="checkbox" />
+          <span style="background:black;"></span>
+          <span style="background:black;"></span>
+          <span style="background:black;"></span>
+          <ul id="menu">
+            <a href="/homepage"><li>Home Page</li></a>
+            <a href="/dailylog"><li>Daily Log</li></a>
+            <a href="/dailygraph"><li>Daily Graph</li></a>
+            <a href = {{link}}><li>{{signout}}</li></a>
+          </ul>
+
+
+        </div>
+      </nav>
     <canvas id="line-chart" width="800" height="450"></canvas>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
