@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Table V04</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+<!--===============================================================================================-->
+<style>
+.container {
+    width: 60%; /* Full width */
+    background-color: #ddd;
+		margin-left: -25px;
+		/* Grey background */
+}
+
+.skills {
+    text-align: center; /* Right-align text */
+    padding-left: 20px%;
+		/* Add some right padding */
+    line-height: 25px; /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
+    color: white; /* White text color */
+}
+
+ /* Green */
+</style>
+<!-- <script type='text/javascript'>
+location.reload(forceGet);
+// function reload() {
+//
+// 	// if (sessionStorage.getItem('page_reloaded')) {
+// 	// 	return false;
+// 	// 	console.log("xD");
+// 	// }
+// 	//
+// 	// setTimeout("location.reload();",400);
+// 	// sessionStorage.setItem('page_reloaded',true)
+// 	// console.log("reloaded")
+// }
+// reload()
+
+
+</script> -->
+
+</head>
+<body>
+<h1> Complete History </h1>
+<a id = "homelink" href = "/homepage">Log another feeling</a>
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+
+				<div class="table100 ver5 m-b-110">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">Emotion Logged</th>
+									<th class="cell100 column2">Intensity</th>
+									<th class="cell100 column3">Time</th>
+									<th class="cell100 column4">Reason</th>
+									<!-- <th class="cell100 column5">Date</th> -->
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+								{% for entry in tableData %}
+								<tr class="row100 body">
+									<td class="cell100 column1">{{ entry.chosen_emotion }}</td>
+									<td class="cell100 column2">
+										<div class="container">
+  <div class="skills" style = "width:{{entry.chosen_intensity}}0%; background-color: #4CAF50; margin-left: -20px;">{{entry.chosen_intensity}}  </div>
+</div>
+									</td>
+									<td class="cell100 column3">{{ entry.chosen_time}}</td>
+									<td class="cell100 column4">{{ entry.chosen_reason}}</td>
+									<!-- <td class="cell100 column5"></td> -->
+								</tr>
+								{% endfor%}
+
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a id = "homelink" href = "/homepage">Log another feeling</a>
+
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+
+
+	</script>
+<!--===============================================================================================-->
+	<script src="static/main.js"></script>
+
+</body>
+</html>
