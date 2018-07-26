@@ -1,3 +1,6 @@
+
+#ADD MEME FOR EVERY EMOTIONNNNNNNN!!!!!!!!!
+
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import webapp2
@@ -97,7 +100,7 @@ class homePage(webapp2.RequestHandler):
         content = JINJA_ENV.get_template('templates/homepage.html')
 
         logout_url = users.create_logout_url('/')
-        signout = 'Sign out'
+        signout = 'Sign Out'
         link = logout_url
         # description = {
         # 'I laughed': {'feeling': 'joyful',
@@ -198,6 +201,7 @@ class dailyLog(webapp2.RequestHandler):
 		#e = Feelings(chosen_emotion = "sad", chosen_intensity = 3)
 		#e.put()
 		EmotionData.put()
+        time.sleep(0.5)
 		self.redirect('/dailylog')
 
     def get(self):

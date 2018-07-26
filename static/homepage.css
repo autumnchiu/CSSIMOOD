@@ -26,7 +26,7 @@ margin-left: 3%;
 
 }
 @import url('https://fonts.googleapis.com/css?family=Raleway');
-
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker')
 #spiral-up {
   color:black;
   font-family: 'Raleway', sans-serif;
@@ -35,6 +35,14 @@ body {
    background-color: #ECFFED
  }
 
+.about {
+  font-family: 'Permanent Marker', cursive;
+
+}
+/* .about {
+
+  font-family: 'Kalam', cursive;
+} */
 /* .buttons {
   width: 520px;
   display: grid;
@@ -148,8 +156,11 @@ a
 
 a:hover
 {
-  color: tomato;
+  background: rgba(0,0,0,0);
+	color: #ffffff;
+	box-shadow: inset 0 0 0 3px #ffffff;
 }
+
 
 #menuToggle
 {
@@ -193,7 +204,7 @@ a:hover
   margin-bottom: 5px;
   position: relative;
 
-  background: #f8efff; /* hamburger color */
+  background: #9CFFDD; /* hamburger color #f8efff*/
   border-radius: 3px;
 
   z-index: 1;

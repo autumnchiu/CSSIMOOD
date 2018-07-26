@@ -21,17 +21,20 @@
 	<link rel="stylesheet" type="text/css" href="static/css/main.css">
 <!--===============================================================================================-->
 <script type='text/javascript'>
-function reload() {
+location.reload(forceGet);
+// function reload() {
+//
+// 	// if (sessionStorage.getItem('page_reloaded')) {
+// 	// 	return false;
+// 	// 	console.log("xD");
+// 	// }
+// 	//
+// 	// setTimeout("location.reload();",400);
+// 	// sessionStorage.setItem('page_reloaded',true)
+// 	// console.log("reloaded")
+// }
+// reload()
 
-	if (sessionStorage.getItem('page_reloaded')) {
-		return
-	}
-
-	setTimeout("location.reload();",1000);
-	sessionStorage.setItem('page_reloaded',true)
-	console.log("reloaded")
-}
-reload()
 
 </script>
 
