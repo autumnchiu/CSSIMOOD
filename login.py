@@ -6,8 +6,12 @@ from google.appengine.ext import ndb
 import webapp2
 import jinja2
 import os
+<<<<<<< HEAD
 import datetime
 import time
+=======
+from datetime import datetime, timedelta
+>>>>>>> 2cbca84fa10c90a7781ad0fa5d0b5018a8e85593
 # from datetime import datetime
 #from html import HTML
 
@@ -135,7 +139,7 @@ class dailyLog(webapp2.RequestHandler):
         answer = self.request.get('answer')
         intensityAnswer = int(self.request.get('intensityAnswer'))
         my_emotion = self.request.get('my_emotion')
-        time = datetime.datetime.now()
+        time = datetime.now()
         #time = self.timestamp.strftime('%Y-%m-%d %H:%M:%S')
         #self.response.write(answer)
         EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion, chosen_time=time, user = users.get_current_user().user_id())
@@ -147,13 +151,13 @@ class dailyLog(webapp2.RequestHandler):
 
     def get(self):
         table_template = JINJA_ENV.get_template('templates/table/index.html')
-        today = datetime.datetime.today()
-        date = datetime.datetime(today.year,today.month,today.day)
+        today = datetime.today()
+        date = datetime(today.year,today.month,today.day)
         print date
         time.sleep(0.1)
         tableData = Feelings.query(
     		ndb.AND(Feelings.chosen_time >= date,
-            Feelings.chosen_time < date + datetime.timedelta(days=1), Feelings.user == users.get_current_user().user_id())).order(Feelings.chosen_time)
+            Feelings.chosen_time < date + timedelta(days=1), Feelings.user == users.get_current_user().user_id())).order(Feelings.chosen_time)
         self.response.write(table_template.render(tableData = tableData))
 
 class StyleHandler(webapp2.RequestHandler):
@@ -165,18 +169,30 @@ class dailyGraphHandler(webapp2.RequestHandler):
     def get(self):
         xAxis = []
         yAxis = []
-        my_emotion = self.request.get('my_emotion')
-        allTimes = Feelings.query()
-        index = DESCRIPTION[my_emotion]['index']
-        for time in sorted(allTimes, key = lambda t: t.chosen_time):
+        user = users.get_current_user()
+        current_date = datetime.now().replace(hour=0, minute=0, second=0)
+        my_todays_entries = (Feelings.query()
+                .filter(ndb.AND(
+                                Feelings.user == user.user_id(),
+                                Feelings.chosen_time >= current_date,
+                                ))
+                .order(Feelings.chosen_time)
+                .fetch())
+        #allTimes = Feelings.query().filter(Feelings.user == user.user_id())
+        #index = DESCRIPTION[my_emotion]['index']
+        for entry in my_todays_entries:
             #print(time.chosen_time)
-            print(datetime.datetime.strftime(time.chosen_time, '%H:%M'))
+            print(datetime.strftime(entry.chosen_time, '%H:%M'))
             #print(chosen_intensity)
-            xAxis.append(datetime.datetime.strftime(time.chosen_time, '%H:%M'))
-            yAxis.append(index*chosen_intensity)
+            index = DESCRIPTION[entry.chosen_emotion]['index']
+            xAxis.append(datetime.strftime(entry.chosen_time, '%H:%M'))
+            yAxis.append(index*entry.chosen_intensity)
         #data = [-1,3,-15,2,7,26,82,172,312,433]
         dailygraph = JINJA_ENV.get_template('templates/dailygraph.html')
-        self.response.write(dailygraph.render(xAxis = ','.join(['"%s"'% x for x in xAxis]), yAxis=yAxis))
+        self.response.write(
+                dailygraph.render(
+                        xAxis = xAxis,
+                        yAxis=yAxis))
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
