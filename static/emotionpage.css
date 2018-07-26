@@ -30,7 +30,7 @@
     width: 25px; /* Set a specific slider handle width */
     height: 25px; /* Slider handle height */
     border-radius: 50%;
-    background: #4CAF50; /* Green background */
+    background: #F1C131; /* Green background */
     cursor: pointer; /* Cursor on hover */
 }
 
@@ -52,11 +52,13 @@
   margin-top: 10%;
   margin-bottom: 10%;
   padding: 5%;
-  font-family: 'Raleway', sans-serif;
+  /* font-family: 'Raleway', sans-serif; */
+  font-family: 'Rajdhani', sans-serif;
 }
 
 h2 {
-  font-family: 'Raleway', sans-serif;
+  /* font-family: 'Raleway', sans-serif; */
+  font-family: 'Rajdhani', sans-serif;
   color: #81827D;
   /* background-color: {{ description.color }}; */
 }
@@ -211,4 +213,4 @@ a:hover
    display: none;
  }
 
- body {font-family: Arial;}
+ body {font-family: 'Rajdhani', sans-serif;}
