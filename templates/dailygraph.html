@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="static/dailygraph.css">
+    <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
     <title>Daily Graph</title>
   </head>
   <body>
@@ -23,6 +24,7 @@
 
         </div>
       </nav>
+      <h1>A Graph of Your Daily Emotions</h1>
     <canvas id="line-chart" width="800" height="450"></canvas>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
@@ -35,7 +37,7 @@
       datasets: [{
           //should be numeric value for emotion
           data: {{yAxis}},
-          // label: "North America",
+          label: "Emotional Fluxuations",
           borderColor: "#4BC4AE",
           fill: false
         }
@@ -44,8 +46,9 @@
     options: {
       title: {
         display: true,
-        text: 'A graph of your emotions'
+        text: 'Track your emotions throughout the day! Positivity is on the vertical axes and time is on the horizontal axes'
       }
+
     }
   });
   </script>

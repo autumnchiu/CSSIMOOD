@@ -129,9 +129,12 @@ class homePage(webapp2.RequestHandler):
 class EmotionHandler(webapp2.RequestHandler):
     def dispatch(self):
         my_emotion = self.request.get('emotion')
+        logout_url = users.create_logout_url('/')
+        signout = 'Sign Out'
+        link = logout_url
         #self.response.out.write('The emotion entered was: ' + my_emotion)
         emotionpage = JINJA_ENV.get_template('templates/emotionpage.html')
-        self.response.write(emotionpage.render(emotion=my_emotion, color = DESCRIPTION[my_emotion]['color']))
+        self.response.write(emotionpage.render(emotion=my_emotion, color = DESCRIPTION[my_emotion]['color'], link=link, signout=signout))
 
 class aboutpageHandler(webapp2.RequestHandler):
     def get(self):
@@ -177,6 +180,9 @@ class StyleHandler(webapp2.RequestHandler):
 
 class dailyGraphHandler(webapp2.RequestHandler):
     def get(self):
+        logout_url = users.create_logout_url('/')
+        signout = 'Sign Out'
+        link = logout_url
         xAxis = []
         yAxis = []
         user = users.get_current_user()
@@ -202,7 +208,9 @@ class dailyGraphHandler(webapp2.RequestHandler):
         self.response.write(
                 dailygraph.render(
                         xAxis = xAxis,
-                        yAxis=yAxis))
+                        yAxis=yAxis,
+                        link=link,
+                        signout=signout))
 
 app = webapp2.WSGIApplication([
 	('/', FrontPageHandler),
