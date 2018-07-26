@@ -140,14 +140,10 @@ class dailyLog(webapp2.RequestHandler):
         EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion, chosen_time=time, user = users.get_current_user().user_id())
 		#e = Feelings(chosen_emotion = "sad", chosen_intensity = 3)
 		#e.put()
-<<<<<<< HEAD
 		EmotionData.put()
         time.sleep(0.5)
 		self.redirect('/dailylog')
-=======
-        EmotionData.put()
-        self.redirect('/dailylog')
->>>>>>> d5c7f27195e188a2302c1c8fa871537388251a8d
+
 
     def get(self):
         table_template = JINJA_ENV.get_template('templates/table/index.html')
