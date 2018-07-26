@@ -30,12 +30,12 @@
     <form method="post" action="/dailylog" >
       <input type="text" name="answer"></input>
       <input type="hidden" name="my_emotion" value="{{emotion}}"></input>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit" id = "submitButton" class ="hoverButton">
   </div>
     <div class="slidecontainer">
       <input type="range" min="1" max="10" value="1" class="slider" id="myRange" name = "intensityAnswer">
-      <h2>Intensity</h2>
-      <h2 id="intensity"></h2>
+      <h2>Intensity:</h2> <h2 id="intensity"></h2>
+
     </div>
 
 </form>

@@ -173,6 +173,19 @@ class dailyLog(webapp2.RequestHandler):
             Feelings.chosen_time < date + timedelta(days=1), Feelings.user == users.get_current_user().user_id())).order(Feelings.chosen_time)
         self.response.write(table_template.render(tableData = tableData, link=link,signout=signout))
 
+class totalHistory(webapp2.RequestHandler):
+    def get(self):
+        table_template = JINJA_ENV.get_template('templates/table/indexhistory.html')
+
+        logout_url = users.create_logout_url('/')
+        signout = 'Sign Out'
+        link = logout_url
+
+        tableData = Feelings.query(
+             Feelings.user == users.get_current_user().user_id()).order(Feelings.chosen_time)
+        self.response.write(table_template.render(tableData = tableData, link=link,signout=signout))
+
+
 class StyleHandler(webapp2.RequestHandler):
     def get(self):
         with open('templates/logs.css', 'r') as f:
@@ -218,6 +231,7 @@ app = webapp2.WSGIApplication([
     ('/homepage', homePage),
     ('/admin', AdminPage),
     ('/emotion', EmotionHandler),
+	('/history', totalHistory),
 	# ('/calendar', CalendarHandler),
 	# ('/about', aboutpageHandler),
     ('/logs.css', StyleHandler),
