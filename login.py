@@ -85,7 +85,12 @@ class Feelings(ndb.Model):
 class FrontPageHandler(webapp2.RequestHandler):
 	def get(self):
 		content = JINJA_ENV.get_template('templates/frontpage.html')
-		self.response.write(content.render())
+		user = users.get_current_user()
+		if user:
+			start_link = "/homepage"
+		else:
+			start_link = users.create_login_url('/homepage')
+		self.response.write(content.render(start_link = start_link))
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
