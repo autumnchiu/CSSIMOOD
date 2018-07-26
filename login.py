@@ -7,6 +7,7 @@ import webapp2
 import jinja2
 import os
 from datetime import datetime, timedelta
+import time
 # from datetime import datetime
 #from html import HTML
 
@@ -140,9 +141,9 @@ class dailyLog(webapp2.RequestHandler):
         EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion, chosen_time=time, user = users.get_current_user().user_id())
 		#e = Feelings(chosen_emotion = "sad", chosen_intensity = 3)
 		#e.put()
-		EmotionData.put()
-        time.sleep(0.5)
-		self.redirect('/dailylog')
+        EmotionData.put()
+        #time.sleep(0.5)
+        self.redirect('/dailylog')
 
 
     def get(self):
