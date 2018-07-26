@@ -7,6 +7,7 @@ import webapp2
 import jinja2
 import os
 import datetime
+import time
 # from datetime import datetime
 #from html import HTML
 
@@ -140,21 +141,16 @@ class dailyLog(webapp2.RequestHandler):
         EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion, chosen_time=time, user = users.get_current_user().user_id())
 		#e = Feelings(chosen_emotion = "sad", chosen_intensity = 3)
 		#e.put()
-<<<<<<< HEAD
-		EmotionData.put()
-        time.sleep(0.5)
-		self.redirect('/dailylog')
-=======
         EmotionData.put()
+
         self.redirect('/dailylog')
->>>>>>> d5c7f27195e188a2302c1c8fa871537388251a8d
 
     def get(self):
         table_template = JINJA_ENV.get_template('templates/table/index.html')
         today = datetime.datetime.today()
         date = datetime.datetime(today.year,today.month,today.day)
         print date
-
+        time.sleep(0.1)
         tableData = Feelings.query(
     		ndb.AND(Feelings.chosen_time >= date,
             Feelings.chosen_time < date + datetime.timedelta(days=1), Feelings.user == users.get_current_user().user_id())).order(Feelings.chosen_time)
