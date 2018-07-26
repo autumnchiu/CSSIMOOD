@@ -82,17 +82,21 @@ class Feelings(ndb.Model):
     user = ndb.StringProperty();
 #p = Feelings(chosen_emotion = "angry", chosen_intensity = 7, chosen_reason="I hate my life", chosen_time="September 7")
 #p.put();
+class FrontPageHandler(webapp2.RequestHandler):
+	def get(self):
+		content = JINJA_ENV.get_template('templates/frontpage.html')
+		self.response.write(content.render())
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
-            logout_url = users.create_logout_url('/')
+            logout_url = users.create_logout_url('/homepage')
             greeting = 'Welcome! (<a href="{}">sign out</a>)'.format(
                 logout_url)
             self.redirect('/homepage')
         else:
-            login_url = users.create_login_url('/')
+            login_url = users.create_login_url('/homepage')
             greeting = '<a href="{}">Sign in</a>'.format(login_url)
         self.response.write(
             '<html><body>{}</body></html>'.format(greeting))
@@ -192,12 +196,13 @@ class dailyGraphHandler(webapp2.RequestHandler):
                         yAxis=yAxis))
 
 app = webapp2.WSGIApplication([
-    ('/', MainPage),
+	('/', FrontPageHandler),
+	('/login', MainPage),
     ('/homepage', homePage),
     ('/admin', AdminPage),
     ('/emotion', EmotionHandler),
 	# ('/calendar', CalendarHandler),
-	('/about', aboutpageHandler),
+	# ('/about', aboutpageHandler),
     ('/logs.css', StyleHandler),
     ('/dailylog', dailyLog),
     ('/dailygraph', dailyGraphHandler)
