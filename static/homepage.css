@@ -1,6 +1,6 @@
 .button {
     /* $button-dimmension: height *.2; */
-    height: 15vw;
+height: 15vw;
 width: 15vw;
 background-color: #FFDDC0;
 border: none;
@@ -18,7 +18,8 @@ vertical-align: middle;
 flex-direction: column;
 justify-content: center;
 /* display: inline-block; */
-font-family: 'Raleway', sans-serif;
+/* font-family: 'Raleway', sans-serif; */
+font-family: 'Rajdhani', sans-serif;
 border-radius: 50%;
 margin-right: 5%;
 margin-top: 5%;
@@ -29,11 +30,14 @@ margin-left: 3%;
 
 #spiral-up {
   color:black;
-  font-family: 'Raleway', sans-serif;
+  /* font-family: 'Raleway', sans-serif; */
+  font-family: 'Rajdhani', sans-serif;
 }
 body {
-   background-color: #ECFFED
+   background-color: #FFFFFF
  }
+
+ /* #ECFFED */
 
 /* .buttons {
   width: 520px;
@@ -81,7 +85,8 @@ body {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
-    font-family: 'Raleway', sans-serif;
+    /* font-family: 'Raleway', sans-serif; */
+    font-family: 'Rajdhani', sans-serif;
     color: #2196F3;
     display: block;
 }
@@ -118,7 +123,8 @@ h2 {
   line-height: 50px;
   vertical-align: baseline;
   font-size: 20;
-  font-family: 'Raleway', sans-serif;
+  /* font-family: 'Raleway', sans-serif; */
+  font-family: 'Rajdhani', sans-serif;
 }
 
 #icontitle{
@@ -148,7 +154,7 @@ a
 
 a:hover
 {
-  color: tomato;
+  color: black;
 }
 
 #menuToggle
@@ -287,8 +293,8 @@ a:hover
    display: none;
  }
 
- body {font-family: Arial;}
+ body {font-family: 'Rajdhani', sans-serif;}
 
-#Ralewayfont{
+/* #Ralewayfont{
   font-family: 'Raleway', sans-serif;
-}
+} */
