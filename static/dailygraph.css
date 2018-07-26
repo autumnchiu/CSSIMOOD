@@ -156,3 +156,8 @@ a:hover
 h1 {
   font-family: 'Rajdhani', sans-serif;
 }
+
+#line-chart {
+  margin: auto;
+
+}
