@@ -110,7 +110,7 @@ location.reload(forceGet);
   <div class="skills" style = "width:{{entry.chosen_intensity}}0%; background-color: #4CAF50; margin-left: -20px;">{{entry.chosen_intensity}}  </div>
 </div>
 									</td>
-									<td class="cell100 column3">{{ entry.chosen_time}}</td>
+									<td class="cell100 column3">{{entry.chosen_time.strftime('%m/%d/%y %H:%M')}}</td>
 									<td class="cell100 column4">{{ entry.chosen_reason}}</td>
 									<!-- <td class="cell100 column5"></td> -->
 								</tr>
