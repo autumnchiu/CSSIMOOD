@@ -27,6 +27,8 @@
     width: 60%; /* Full width */
     background-color: #ddd;
 		margin-left: -25px;
+		padding-left: 0px;
+		padding-right: 0px;
 		/* Grey background */
 }
 
@@ -108,7 +110,7 @@ location.reload(forceGet);
 									<td class="cell100 column1">{{ entry.chosen_emotion }}</td>
 									<td class="cell100 column2">
 										<div class="container">
-  <div class="skills" style = "width:{{entry.chosen_intensity}}0%; background-color: #4CAF50; margin-left: -20px;">{{entry.chosen_intensity}}  </div>
+  <div class="skills" style = "width:{{entry.chosen_intensity}}0%; background-color: #4CAF50; ">{{entry.chosen_intensity}}  </div>
 </div>
 									</td>
 									<td class="cell100 column3">{{ entry.chosen_time.strftime('%m/%d/%y %H:%M')}}</td>
