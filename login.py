@@ -148,6 +148,7 @@ class dailyLog(webapp2.RequestHandler):
         intensityAnswer = int(self.request.get('intensityAnswer'))
         my_emotion = self.request.get('my_emotion')
         time = datetime.now()
+		# time = datetime.strftime(time, '%H:%M')
         #time = self.timestamp.strftime('%Y-%m-%d %H:%M:%S')
         #self.response.write(answer)
         EmotionData = Feelings(chosen_reason =answer,chosen_intensity =intensityAnswer, chosen_emotion=my_emotion, chosen_time=time, user = users.get_current_user().user_id())

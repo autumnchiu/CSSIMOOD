@@ -19,6 +19,8 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="static/css/util.css">
 	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" href="static/css/index.css">
+	<link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
 <!--===============================================================================================-->
 <style>
 .container {
@@ -58,6 +60,24 @@ location.reload(forceGet);
 
 </head>
 <body>
+	<nav role='navigation'>
+      <div id="menuToggle">
+
+        <input type="checkbox" />
+        <span style="background:black;"></span>
+        <span style="background:black;"></span>
+        <span style="background:black;"></span>
+        <ul id="menu">
+          <a href="/homepage"><li>Home Page</li></a>
+          <a href="/dailylog"><li>Daily Log</li></a>
+          <a href="/dailygraph"><li>Daily Graph</li></a>
+          <a href="/history"><li>Total History</li></a>
+          <a href = {{link}}><li>{{signout}}</li></a>
+        </ul>
+
+
+      </div>
+    </nav>
 <h1> Complete History </h1>
 <a id = "homelink" href = "/homepage">Log another feeling</a>
 	<div class="limiter">
